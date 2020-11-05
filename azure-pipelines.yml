@@ -26,9 +26,9 @@ stages:
         tags: |
           $(tag)
 
-variables:
-    wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
-    dotnetSdkVersion: '3.1.300'
+      variables:
+        wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
+        dotnetSdkVersion: '3.1.300'
 
 
     - task: UseDotNet@2
