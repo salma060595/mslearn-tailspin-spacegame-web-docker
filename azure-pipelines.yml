@@ -26,7 +26,7 @@ stages:
         action: 'Build an image'
         dockerFile: '$(Build.SourcesDirectory)/DOCKER'
         buildArguments: 'baseimage=tailspinspacegame27900.azurecr.io/web:latest'
-        imageName: 'tailspinspacegame27900:$(Build.BuildId)'
+        imageName: 'web:$(Build.BuildId)'
         additionalImageTags: '$(tag)'
         includeLatestTag: true
         
