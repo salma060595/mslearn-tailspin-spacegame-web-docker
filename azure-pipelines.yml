@@ -52,6 +52,6 @@ stages:
     steps:
     - task: AzureWebAppContainer@1
       inputs:
-       appName: $(WebAppName)
-       azureSubscription: 'Salma-Release'
-       imageName: $(RegistryName)/$(webRepository):$(build.buildId)
+        azureSubscription: 'Salma-Release'
+        appName: 'tailspin-space-game-web-27900'
+        containers: 'tailspinspacegame27900.azurecr.io/web:latest'
