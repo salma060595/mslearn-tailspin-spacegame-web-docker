@@ -17,16 +17,26 @@ stages:
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
-    - task: Docker@2
-      displayName: 'Build and push the image to container registry'
+    - task: Docker@0
       inputs:
-        command: buildAndPush
-        buildContext: $(Build.Repository.LocalPath)
-        repository: $(webRepository)
-        dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: 'tailspinspacegame27900.azurecr.io'
-        tags: |
-          $(tag)
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Salma-Release'
+        azureContainerRegistry: '{"loginServer":"tailspinspacegame27900.azurecr.io", "id" : "/subscriptions/5ccadedb-8ce8-43da-8d17-f91b671c9110/resourceGroups/tailspin-space-game-rg/providers/Microsoft.ContainerRegistry/registries/tailspinspacegame27900"}'
+        action: 'Build an image'
+        dockerFile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
+        buildArguments: 'baseimage=tailspinspacegame27900.azurecr.io/web:latest'
+        imageName: 'tailspinspacegame27900:$(Build.BuildId)'
+        additionalImageTags: '$(tag)'
+        includeLatestTag: true
+        
+    - task: Docker@0
+      displayName: 'Push an image'
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Salma-Release'
+        azureContainerRegistry: '{"loginServer":"tailspinspacegame27900.azurecr.io", "id" : "/subscriptions/5ccadedb-8ce8-43da-8d17-f91b671c9110/resourceGroups/tailspin-space-game-rg/providers/Microsoft.ContainerRegistry/registries/tailspinspacegame27900"}'
+        action: 'Push an image'
+        imageName: 'tailspinspacegame27900:$(Build.BuildId)'
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
