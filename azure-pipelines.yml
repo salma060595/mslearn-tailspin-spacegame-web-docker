@@ -25,7 +25,7 @@ stages:
         azureContainerRegistry: '{"loginServer":"tailspinspacegame27900.azurecr.io", "id" : "/subscriptions/5ccadedb-8ce8-43da-8d17-f91b671c9110/resourceGroups/tailspin-space-game-rg/providers/Microsoft.ContainerRegistry/registries/tailspinspacegame27900"}'
         action: 'Build an image'
         dockerFile: '$(Build.SourcesDirectory)/DOCKER'
-        buildArguments: 'baseimage=tailspinspacegame27900.azurecr.io/web:latest'
+        buildArguments: 'baseimage=tailspinspacegame27900.azurecr.io/web:$(Build.BuildId)'
         imageName: 'web:$(Build.BuildId)'
         additionalImageTags: '$(tag)'
         includeLatestTag: true
@@ -54,4 +54,4 @@ stages:
       inputs:
         azureSubscription: 'Salma-Release'
         appName: 'tailspin-space-game-web-27900'
-        containers: 'tailspinspacegame27900.azurecr.io/web:latest'
+        containers: 'tailspinspacegame27900.azurecr.io/web:$(Build.BuildId)'
