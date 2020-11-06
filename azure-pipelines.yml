@@ -37,7 +37,7 @@ stages:
         azureSubscription: 'Salma-Release'
         azureContainerRegistry: '{"loginServer":"tailspinspacegame27900.azurecr.io", "id" : "/subscriptions/5ccadedb-8ce8-43da-8d17-f91b671c9110/resourceGroups/tailspin-space-game-rg/providers/Microsoft.ContainerRegistry/registries/tailspinspacegame27900"}'
         action: 'Push an image'
-        imageName: 'tailspinspacegame27900:$(Build.BuildId)'
+        imageName: 'web:$(Build.BuildId)'
 
 - stage: 'Deploy'
   displayName: 'Deploy the container'
